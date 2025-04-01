@@ -1,0 +1,48 @@
+import customtkinter as ctk 
+
+ctk.set_appearance_mode('dark')
+
+def validar_login():
+    usuario = campo_usuario.get()
+    senha = campo_senha.get()
+
+    if usuario == 'Kenvra' and senha == '12345':
+        resultado_login.configure(text = 'login feito com sucesso!',text_color = 'green')
+
+    else:
+        resultado_login.configure(text = 'Senha ou Usuario invalidos',text_color = 'red')
+     
+def on_enter(event):
+    botao_login.configure(fg_color=("#0044cc", "#0066ff"))  # Altera a cor ao passar o mouse
+
+def on_leave(event):
+    botao_login.configure(fg_color=("#333333", "#444444"))  # Retorna à cor original
+
+
+app = ctk.CTk()
+app.title('sistema de login')
+app.geometry('300x300')
+
+label_usuario = ctk.CTkLabel(app,text = 'Usuario:')
+label_usuario.pack(pady = 10)
+
+campo_usuario = ctk.CTkEntry(app,placeholder_text = 'Digite seu nome')
+campo_usuario.pack(pady = 10)
+
+label_senha = ctk.CTkLabel(app,text = 'Senha:')
+label_senha.pack(pady = 15)
+
+campo_senha = ctk.CTkEntry(app,placeholder_text = 'Digite sua senha',show= '*')
+campo_senha.pack(pady = 10)
+
+#botão
+botao_login = ctk.CTkButton(app,text = 'Entrar',command = validar_login)
+botao_login.pack(pady = 12)
+
+botao_login.bind("<Enter>", on_enter)  # Vincula o evento de mouse sobre o botão
+botao_login.bind("<Leave>", on_leave)  # Vincula o evento de saída do mouse do botão
+
+resultado_login = ctk.CTkLabel(app,text = '')
+resultado_login.pack(pady = 10)
+
+app.mainloop()
